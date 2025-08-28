@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Configuração do Supabase - Substitua pelos valores da sua conta
+    const SUPABASE_URL = 'https://SEU_ID_DE_PROJETO.supabase.co';
+    const SUPABASE_KEY = 'SUA_CHAVE_PUBLICA_AQUI';
+    
     // Manipulador de envio do formulário
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
@@ -20,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 email: document.getElementById('email').value,
                 cep: document.getElementById('cep').value,
                 segment: document.getElementById('segment').value,
-                message: document.getElementById('message').value,
-                date: new Date().toISOString()
+                message: document.getElementById('message').value
             };
             
             // OPÇÃO 1: Enviar para Formspree
@@ -55,23 +58,52 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             */
             
-            // OPÇÃO 3: Google Sheets via Google Apps Script (Gratuito)
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyzPT6w80w0pAa7vJ5IOvrcKcAvLthYJMpDJ8GxJr97QCQK-DssnRjn-A-6D357gF58/exec';
+            // OPÇÃO 4: Supabase - Banco de dados PostgreSQL com API integrada
+            // Configuração do Supabase - Substitua com suas credenciais
+            const SUPABASE_URL = 'https://seu-projeto.supabase.co';
+            const SUPABASE_KEY = 'sua-chave-publica-aqui';
+            
+            // Obter todos os dados do formulário como objeto
+            const formDataObj = {
+                name: document.getElementById('name').value,
+                business: document.getElementById('business').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                cep: document.getElementById('cep').value,
+                segment: document.getElementById('segment').value,
+                message: document.getElementById('message').value
+            };
             
             // Mostrar indicador de carregamento
-            showFormStatus('info', 'Enviando formulário para o Google Sheets...');
+            showFormStatus('info', 'Enviando formulário...');
             
-            fetch(scriptURL, { 
-                method: 'POST', 
-                body: new FormData(contactForm)
+            // Logging para depuração
+            console.log('Enviando dados para Supabase:', formDataObj);
+            
+            // Enviar para o Supabase usando fetch API
+            fetch(`${SUPABASE_URL}/rest/v1/contatos`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(formDataObj)
             })
             .then(response => {
-                console.log('Resposta:', response);
+                console.log('Resposta completa:', response);
+                
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`Erro ${response.status}: ${text}`);
+                    });
+                }
+                
                 showFormStatus('success', 'Formulário enviado com sucesso! Entraremos em contato em breve.');
                 contactForm.reset();
             })
             .catch(error => {
-                console.error('Erro:', error);
+                console.error('Erro completo:', error);
                 showFormStatus('error', 'Erro ao enviar o formulário: ' + error.message);
             })
             .finally(() => {
@@ -273,6 +305,92 @@ document.addEventListener('DOMContentLoaded', function() {
     let pointIndex = 0;
     let intervalId = null;
     
+    // Adicionar linhas de conexão entre os pontos para simular rede
+    function createConnectionLines() {
+        const mapElement = document.querySelector('.city-map');
+        const points = document.querySelectorAll('.point');
+        
+        // Remover linhas existentes
+        const oldLines = document.querySelectorAll('.connection-line');
+        oldLines.forEach(line => line.remove());
+        
+        // Criar novas linhas
+        points.forEach((point1, i) => {
+            // Obter apenas pontos ativos para conectar
+            if (!point1.classList.contains('active')) return;
+            
+            const rect1 = point1.getBoundingClientRect();
+            const mapRect = mapElement.getBoundingClientRect();
+            
+            const x1 = rect1.left + rect1.width/2 - mapRect.left;
+            const y1 = rect1.top + rect1.height/2 - mapRect.top;
+            
+            points.forEach((point2, j) => {
+                // Evitar conectar com pontos futuros e evitar duplicações
+                if (i >= j || !point2.classList.contains('active')) return;
+                
+                const rect2 = point2.getBoundingClientRect();
+                const x2 = rect2.left + rect2.width/2 - mapRect.left;
+                const y2 = rect2.top + rect2.height/2 - mapRect.top;
+                
+                // Calcular distância
+                const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                
+                // Conectar apenas pontos próximos (limite de 200px)
+                if (distance < 200) {
+                    const line = document.createElement('div');
+                    line.className = 'connection-line';
+                    
+                    // Calcular o comprimento e ângulo da linha
+                    const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                    
+                    // Posicionar e rotacionar a linha
+                    line.style.width = length + 'px';
+                    line.style.left = x1 + 'px';
+                    line.style.top = y1 + 'px';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    // Adicionar linha ao mapa
+                    mapElement.appendChild(line);
+                }
+            });
+        });
+    }
+    
+    // Adicionar comportamento de mostrar informação ao clicar nos pontos também
+    const allPoints = document.querySelectorAll('.point');
+    allPoints.forEach(point => {
+        // Mostrar informação ao clicar ou tocar (para mobile)
+        point.addEventListener('click', function() {
+            const locationInfo = this.querySelector('.location-info');
+            if (locationInfo) {
+                // Remover classes ativas de outras informações
+                document.querySelectorAll('.location-info.info-visible').forEach(info => {
+                    if (info !== locationInfo) {
+                        info.classList.remove('info-visible');
+                    }
+                });
+                
+                // Alternar visibilidade
+                locationInfo.classList.toggle('info-visible');
+                
+                // Adicionar animação de destaque ao clicar
+                this.classList.add('highlight-point');
+                
+                // Remover a classe de destaque após 2 segundos
+                setTimeout(() => {
+                    this.classList.remove('highlight-point');
+                }, 2000);
+                
+                // Esconder após 4 segundos
+                setTimeout(() => {
+                    locationInfo.classList.remove('info-visible');
+                }, 4000);
+            }
+        });
+    });
+    
     // Formatador de CEP
     const cepInput = document.getElementById('cep');
     if (cepInput) {
@@ -292,26 +410,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Função para ativar um ponto com animação mais chamativa
+    function activatePoint(point) {
+        // Adiciona classe para animar o ponto
+        point.classList.remove('future');
+        point.classList.add('active');
+        
+        // Adiciona uma animação de destaque
+        point.classList.add('highlight-point');
+        
+        // Remove a classe de destaque após 4 segundos
+        setTimeout(() => {
+            point.classList.remove('highlight-point');
+        }, 4000);
+        
+        // Faz o ponto piscar 3 vezes
+        let blinkCount = 0;
+        const blinkInterval = setInterval(() => {
+            point.style.opacity = point.style.opacity === '0.5' ? '1' : '0.5';
+            blinkCount++;
+            if (blinkCount >= 6) { // 3 ciclos completos
+                clearInterval(blinkInterval);
+                point.style.opacity = '1';
+            }
+        }, 200);
+        
+        // Mostra a notificação do balão
+        const notification = point.querySelector('.notification-bubble');
+        if (notification) {
+            // Reset da animação
+            notification.style.animation = 'none';
+            setTimeout(() => {
+                notification.style.animation = 'showNotification 4s forwards';
+            }, 10);
+        }
+        
+        // Mostra informação de localização temporariamente
+        const locationInfo = point.querySelector('.location-info');
+        if (locationInfo) {
+            locationInfo.classList.add('info-visible');
+            
+            // Esconder após 4 segundos
+            setTimeout(() => {
+                locationInfo.classList.remove('info-visible');
+            }, 4000);
+        }
+        
+        // Atualizar as linhas de conexão quando um ponto é ativado
+        setTimeout(() => {
+            createConnectionLines();
+        }, 100);
+    }
+    
     const mapObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
             // Quando a seção estiver visível, ativa o primeiro ponto imediatamente
             if (pointIndex < futurePoints.length) {
-                futurePoints[pointIndex].classList.remove('future');
-                futurePoints[pointIndex].classList.add('active');
+                activatePoint(futurePoints[pointIndex]);
                 pointIndex++;
             }
             
-            // Configura um intervalo para ativar um ponto a cada 10 segundos
+            // Configura um intervalo para ativar um ponto a cada 7 segundos (mais rápido para melhor experiência do usuário)
             intervalId = setInterval(() => {
                 if (pointIndex < futurePoints.length) {
-                    futurePoints[pointIndex].classList.remove('future');
-                    futurePoints[pointIndex].classList.add('active');
+                    activatePoint(futurePoints[pointIndex]);
                     pointIndex++;
                 } else {
                     // Todos os pontos foram ativados, podemos limpar o intervalo
                     clearInterval(intervalId);
+                    
+                    // Reset após 5 segundos e comece novamente (loop contínuo)
+                    setTimeout(() => {
+                        // Resetar todos os pontos para futuros novamente
+                        futurePoints.forEach(point => {
+                            point.classList.remove('active');
+                            point.classList.add('future');
+                        });
+                        
+                        // Resetar o índice
+                        pointIndex = 0;
+                        
+                        // Iniciar a animação novamente após um pequeno delay
+                        setTimeout(() => {
+                            if (entries[0].isIntersecting) {
+                                if (pointIndex < futurePoints.length) {
+                                    activatePoint(futurePoints[pointIndex]);
+                                    pointIndex++;
+                                }
+                                
+                                // Reinicia o intervalo
+                                intervalId = setInterval(() => {
+                                    if (pointIndex < futurePoints.length) {
+                                        activatePoint(futurePoints[pointIndex]);
+                                        pointIndex++;
+                                    } else {
+                                        clearInterval(intervalId);
+                                    }
+                                }, 7000);
+                            }
+                        }, 2000);
+                    }, 5000);
                 }
-            }, 10000); // 10000 ms = 10 segundos
+            }, 7000); // 7000 ms = 7 segundos
         } else {
             // Se a seção sair da visão, limpa o intervalo
             if (intervalId) {
