@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Menu móvel
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Fechar menu quando clicar em um link
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Fechar menu quando clicar fora dele
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.navbar')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+    
     // Manipulador de envio do formulário
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
