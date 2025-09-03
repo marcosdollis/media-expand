@@ -522,4 +522,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     mapObserver.observe(mapSection);
+    
+    // Garantir que o vídeo do YouTube carregue corretamente
+    function checkYouTubeVideo() {
+        const videoIframe = document.querySelector('.video-container iframe');
+        
+        if (videoIframe) {
+            // Verificar se a URL contém os parâmetros necessários
+            const currentSrc = videoIframe.getAttribute('src');
+            
+            if (currentSrc && !currentSrc.includes('playlist=')) {
+                // Adicionar os parâmetros necessários para loop se estiverem faltando
+                const videoId = currentSrc.split('/').pop().split('?')[0];
+                const updatedSrc = `https://www.youtube.com/embed/${videoId}?playlist=${videoId}&loop=1&autoplay=1&mute=1`;
+                videoIframe.setAttribute('src', updatedSrc);
+                console.log('YouTube video parameters fixed');
+            }
+        }
+    }
+    
+    // Executar a verificação após o carregamento completo da página
+    window.addEventListener('load', checkYouTubeVideo);
 });
