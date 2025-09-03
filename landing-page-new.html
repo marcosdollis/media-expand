@@ -539,7 +539,7 @@
                 </div>
             </div>
             
-            <form class="contact-form" id="contactForm" method="POST">
+            <form class="contact-form" id="contactForm" method="POST" action="https://formsubmit.co/marcosfelipedollis@gmail.com">
                 <h3>Entre em contato</h3>
                 <p class="form-description">Preencha o formulário abaixo e entraremos em contato com você para discutir como a MediaExpand pode ajudar o seu negócio a crescer.</p>
                 
@@ -589,10 +589,12 @@
                     <label for="message">Mensagem</label>
                 </div>
                 
-                <!-- Campos ocultos para configuração do Formspree -->
-                <input type="hidden" name="_subject" value="Novo contato do MediaExpand">
-                <input type="text" name="_gotcha" style="display:none">
+                <!-- Configuração do FormSubmit -->
+                <input type="hidden" name="_subject" value="Novo Lead - MediaExpand">
+                <input type="text" name="_honey" style="display:none">
                 <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://seusite.github.io/pagina-de-agradecimento.html">
                 
                 <button type="submit" class="submit-button" id="submitButton">Quero fazer parte</button>
                 <div id="formStatus" class="form-status"></div>
@@ -607,6 +609,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script-new.js"></script>
 </body>
 </html>
