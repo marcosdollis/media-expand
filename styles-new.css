@@ -513,17 +513,29 @@ section {
     align-items: center;
     margin: 40px auto;
     width: 100%;
-    max-width: 800px;
+    max-width: 800px; /* Controla o tamanho máximo do vídeo */
+    position: relative;
+    padding-bottom: 20px; /* Espaço abaixo do vídeo */
 }
 
 .video-container iframe {
     aspect-ratio: 16/9;
     width: 100%;
     height: auto;
+    max-height: 450px; /* Altura máxima para telas grandes */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
+    display: block;
 }
 
+/* Tamanho em telas médias */
+@media (max-width: 1200px) {
+    .video-container {
+        max-width: 700px;
+    }
+}
+
+/* Tamanho em telas pequenas */
 @media (max-width: 768px) {
     .video-container {
         max-width: 90%;
