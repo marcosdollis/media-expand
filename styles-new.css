@@ -167,11 +167,12 @@ section {
 
 /* Mobile menu button */
 .mobile-menu-btn {
-    display: none;
+    display: none;  /* Escondido em telas grandes */
     font-size: 1.8rem;
     color: white;
     cursor: pointer;
     transition: var(--transition);
+    z-index: 100;  /* Garantir que fique acima de outros elementos */
 }
 
 .mobile-menu-btn:hover {
@@ -1471,8 +1472,15 @@ footer {
         font-size: 0.9rem;
     }
     
+    /* Navegação mobile aprimorada */
+    .navbar {
+        position: relative;
+    }
+    
     .mobile-menu-btn {
-        display: block;
+        display: block !important;
+        position: relative;
+        z-index: 101;
     }
     
     .nav-links {
@@ -1482,12 +1490,13 @@ footer {
         left: 0;
         right: 0;
         flex-direction: column;
-        background: rgba(42, 65, 232, 0.9);
+        background: rgba(42, 65, 232, 0.95);
         padding: 20px;
         border-radius: 0 0 15px 15px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         z-index: 100;
         text-align: center;
+        width: 100%;
     }
     
     .nav-links.active {
@@ -1497,5 +1506,7 @@ footer {
     .nav-links a {
         padding: 15px 0;
         width: 100%;
+        display: block;
+        font-size: 1.1rem;
     }
 }
