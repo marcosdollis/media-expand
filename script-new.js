@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Menu móvel
+    // Menu móvel - aprimorado
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     
     if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Impede propagação do evento
             navLinks.classList.toggle('active');
+            console.log('Menu mobile clicado'); // Para debug
         });
         
         // Fechar menu quando clicar em um link
@@ -22,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('active');
             }
         });
+    } else {
+        console.error('Menu mobile não encontrado'); // Para debug
     }
     
     // Manipulador de envio do formulário
