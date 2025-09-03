@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado pelo contato - MediaExpand</title>
+    <link rel="stylesheet" href="styles-new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .thank-you-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(120deg, #2a41e8 0%, #4a5fe9 50%, #ff6b6b 100%);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease-in-out infinite alternate;
+            color: white;
+        }
+        
+        .thank-you-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            color: var(--dark);
+            margin: 0 auto;
+        }
+        
+        .check-icon {
+            color: #2ecc71;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        h1 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            text-decoration: none;
+            padding: 15px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-box">
+            <i class="fas fa-check-circle check-icon"></i>
+            <h1>Obrigado pelo seu contato!</h1>
+            <p>Recebemos sua mensagem com sucesso. Um de nossos consultores entrará em contato com você em breve para discutir como a MediaExpand pode ajudar seu negócio a crescer.</p>
+            <p>Enquanto isso, fique à vontade para explorar mais sobre nossos serviços e conhecer histórias de sucesso de nossos parceiros.</p>
+            <a href="landing-page-new.html" class="cta-button">Voltar para o site</a>
+        </div>
+    </div>
+</body>
+</html>
