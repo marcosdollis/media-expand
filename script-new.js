@@ -2,30 +2,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Menu móvel - aprimorado
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    
+
+    function toggleMenu() {
+        if (navLinks) {
+            navLinks.classList.toggle('active');
+        }
+    }
+
+    function closeMenu() {
+        if (navLinks) {
+            navLinks.classList.remove('active');
+        }
+    }
+
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Impede propagação do evento
-            navLinks.classList.toggle('active');
-            console.log('Menu mobile clicado'); // Para debug
+            e.stopPropagation();
+            toggleMenu();
         });
-        
+
         // Fechar menu quando clicar em um link
         const navLinksItems = document.querySelectorAll('.nav-links a');
         navLinksItems.forEach(link => {
             link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
+                closeMenu();
             });
         });
-        
-        // Fechar menu quando clicar fora dele
+
+        // Fechar menu quando clicar fora do menu
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.navbar')) {
-                navLinks.classList.remove('active');
+            if (navLinks.classList.contains('active') && !event.target.closest('.navbar')) {
+                closeMenu();
             }
         });
     } else {
-        console.error('Menu mobile não encontrado'); // Para debug
+        console.error('Menu mobile não encontrado');
     }
     
     // Manipulador de envio do formulário

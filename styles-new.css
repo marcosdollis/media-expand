@@ -1500,7 +1500,9 @@ footer {
     }
     
     .nav-links.active {
-        display: flex;
+    display: flex;
+    max-height: 80vh;
+    overflow-y: auto;
     }
     
     .nav-links a {
