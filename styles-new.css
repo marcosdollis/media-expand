@@ -493,6 +493,43 @@ section {
     z-index: 1;
 }
 
+/* Video Section */
+.video-section {
+    background: var(--light);
+    padding: 80px 5%;
+}
+
+.video-description {
+    text-align: center;
+    color: var(--gray);
+    max-width: 700px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.video-container iframe {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .video-container {
+        max-width: 90%;
+    }
+}
+
 .stats-container {
     display: flex;
     justify-content: space-between;
