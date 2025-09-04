@@ -815,9 +815,36 @@ section {
 
 .partners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+    .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .partner-card {
+        min-width: 0;
+        width: 100%;
+        margin: 0;
+    }
+    .partner-content {
+        padding: 20px 10px 15px;
+    }
+    .partner-content p {
+        font-size: 0.95rem;
+        padding-left: 10px;
+    }
+    .partner-info {
+        flex-direction: column;
+        align-items: flex-end;
+        padding-top: 10px;
+    }
+    .partner-details {
+        text-align: right;
+    }
 }
 
 .partner-card {
