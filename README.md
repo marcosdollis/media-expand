@@ -49,3 +49,22 @@ Esse modelo é altamente escalável, mantém controle centralizado e pode cresce
 
 se uma pessoa tem o problema que vc tem a solução, de quem você quer que a pessoa se lembre ? do seu concorrente ? quem não é visto não é lembrado... mostre sua marca 
 
+📌 1. Alcance local qualificado
+500 pessoas/mês circulando nas lavanderias = público real, recorrente e com tempo para absorver a mensagem.
+Exposição frequente: diferente de anúncios rápidos, o público vê a marca várias vezes, criando familiaridade.
+📱 2. Visibilidade digital
+Destaque no Instagram com 5.000 seguidores.
+Potencial de engajamento e reforço da marca fora do ponto físico.
+🛡️ 3. Exclusividade por segmento
+Garante que nenhum concorrente direto vai aparecer no mesmo espaço.
+Cria uma posição de destaque e autoridade local para a marca.
+💸 4. Custo-benefício
+Investimento acessível (R$250/mês) comparado a outras mídias locais.
+Alta recorrência de exposição por um valor baixo.
+📈 5. Potencial de retorno
+A marca é vista por pessoas da própria cidade, o que aumenta a chance de conversão.
+Pode ser usada para ações promocionais, lançamentos ou reforço de marca.
+🧠 6. Posicionamento estratégico
+Estar presente em locais do dia a dia (como lavanderias) cria associação positiva e constante.
+A marca se torna parte da rotina das pessoas.
+
