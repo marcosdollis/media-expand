@@ -68,3 +68,38 @@ Pode ser usada para ações promocionais, lançamentos ou reforço de marca.
 Estar presente em locais do dia a dia (como lavanderias) cria associação positiva e constante.
 A marca se torna parte da rotina das pessoas.
 
+
+🔍 1. Clareza na Proposta de Valor
+Sugestão: Logo no topo da página, destaque o que você oferece e por que isso é valioso. Exemplo:
+“Aumente sua visibilidade com mídia digital em locais estratégicos — alcance até 5.000 pessoas por mês!”
+
+🎯 2. CTA (Call to Action) mais forte
+Sugestão: Use botões com verbos de ação e urgência, como:
+“Quero anunciar agora”
+“Solicite uma proposta grátis”
+“Garanta seu espaço exclusivo”
+Dica extra: Repita o CTA em diferentes partes da página (início, meio e fim).
+🧠 3. Prova social e autoridade
+Sugestão: Adicione:
+Depoimentos de clientes satisfeitos.
+Logos de empresas que já anunciaram.
+Números de impacto: “+10 TVs instaladas”, “+500 pessoas impactadas/mês”.
+📱 4. Design responsivo e escaneável
+Sugestão:
+Use títulos grandes, ícones e seções curtas.
+Evite blocos de texto longos.
+Teste em celular: 70% dos acessos vêm de dispositivos móveis.
+📈 5. Gatilhos mentais
+Sugestão: Use elementos como:
+Escassez: “Vagas limitadas por segmento!”
+Urgência: “Últimos dias para garantir sua vaga!”
+Exclusividade: “Anuncie com exclusividade no seu nicho!”
+🧪 6. Testes e otimização
+Sugestão:
+Faça testes A/B com diferentes títulos, imagens e CTAs.
+Use ferramentas como Hotjar para ver onde os usuários clicam.
+Analise métricas com Google Analytics.
+📋 7. Formulário simples
+Sugestão:
+Peça apenas o essencial: nome, e-mail, telefone.
+Use frases como: “Receba uma proposta personalizada”.
