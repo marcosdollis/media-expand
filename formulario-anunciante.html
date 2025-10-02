@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Anunciante - MediaExpand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a41e8;
+            --primary-light: #4a5fe9;
+            --dark: #1e1e2c;
+            --gray: #8b8b9a;
+            --light: #f7f7ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .form-header p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group label .required {
+            color: #ff6b6b;
+            margin-left: 3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 65, 232, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            border-color: var(--primary);
+            background: rgba(42, 65, 232, 0.05);
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin: 0;
+        }
+
+        .radio-option span,
+        .checkbox-option span {
+            flex: 1;
+            user-select: none;
+        }
+
+        .radio-option.selected,
+        .checkbox-option.selected {
+            border-color: var(--primary);
+            background: rgba(42, 65, 232, 0.1);
+        }
+
+        .conditional-field {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .conditional-field.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .help-text i {
+            color: var(--primary);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #2a41e8 0%, #4a5fe9 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(42, 65, 232, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .submit-button i {
+            font-size: 1rem;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-container {
+                margin: 10px auto;
+                padding: 25px 20px;
+            }
+
+            .form-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-header p {
+                font-size: 0.9rem;
+            }
+
+            .form-section h3 {
+                font-size: 1.1rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px; /* Previne zoom no iOS */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h1><i class="fas fa-tv"></i> Cadastro de Anunciante</h1>
+            <p>Preencha as informações abaixo para começar a anunciar na MediaExpand</p>
+        </div>
+
+        <form id="advertiserForm" method="POST" action="https://formsubmit.co/marcosfelipedollis@gmail.com">
+            <!-- Dados do Estabelecimento -->
+            <div class="form-section">
+                <h3><i class="fas fa-store"></i> Dados do Estabelecimento</h3>
+                
+                <div class="form-group">
+                    <label for="businessName">Nome do Estabelecimento <span class="required">*</span></label>
+                    <input type="text" id="businessName" name="businessName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerName">Nome do Responsável <span class="required">*</span></label>
+                    <input type="text" id="ownerName" name="ownerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="businessType">Ramo do Negócio <span class="required">*</span></label>
+                    <input type="text" id="businessType" name="businessType" placeholder="Ex: Restaurante, Lavanderia, Academia, etc." required>
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        Descreva o tipo de negócio ou serviço que você oferece
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefone/WhatsApp <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Endereço Completo <span class="required">*</span></label>
+                    <input type="text" id="address" name="address" placeholder="Rua, número, bairro, cidade" required>
+                </div>
+            </div>
+
+            <!-- Informações de Público -->
+            <div class="form-section">
+                <h3><i class="fas fa-users"></i> Público e Movimento</h3>
+                
+                <div class="form-group">
+                    <label for="dailyTraffic">Quantas pessoas passam pelo estabelecimento por dia (média)? <span class="required">*</span></label>
+                    <select id="dailyTraffic" name="dailyTraffic" required>
+                        <option value="" disabled selected>Selecione uma faixa</option>
+                        <option value="50-100">50 a 100 pessoas/dia</option>
+                        <option value="100-200">100 a 200 pessoas/dia</option>
+                        <option value="200-300">200 a 300 pessoas/dia</option>
+                        <option value="300-500">300 a 500 pessoas/dia</option>
+                        <option value="500+">Mais de 500 pessoas/dia</option>
+                    </select>
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        Considere clientes, acompanhantes e pessoas que aguardam
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="peakHours">Horários de maior movimento <span class="required">*</span></label>
+                    <input type="text" id="peakHours" name="peakHours" placeholder="Ex: 11:30-13:30 e 18:00-20:00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="operatingDays">Dias de funcionamento <span class="required">*</span></label>
+                    <select id="operatingDays" name="operatingDays" required>
+                        <option value="" disabled selected>Selecione</option>
+                        <option value="seg-sex">Segunda a Sexta</option>
+                        <option value="seg-sab">Segunda a Sábado</option>
+                        <option value="todos-dias">Todos os dias (Seg-Dom)</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Infraestrutura Técnica -->
+            <div class="form-section">
+                <h3><i class="fas fa-tv"></i> Infraestrutura para TV</h3>
+                
+                <div class="form-group">
+                    <label>Você já possui TV no estabelecimento? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="hasTV" value="sim" required>
+                            <span>Sim, já tenho TV</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="hasTV" value="nao" required>
+                            <span>Não, preciso de uma TV</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tvDetailsSection" class="conditional-field">
+                    <div class="form-group">
+                        <label for="tvBrand">Qual a marca da TV?</label>
+                        <input type="text" id="tvBrand" name="tvBrand" placeholder="Ex: Samsung, LG, Sony, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tvSize">Tamanho da TV (polegadas)</label>
+                        <select id="tvSize" name="tvSize">
+                            <option value="">Selecione</option>
+                            <option value="32">32 polegadas</option>
+                            <option value="40-43">40 a 43 polegadas</option>
+                            <option value="50-55">50 a 55 polegadas</option>
+                            <option value="60+">60 polegadas ou mais</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>A TV é Smart TV?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="isSmartTV" value="sim">
+                                <span>Sim, é Smart TV</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="isSmartTV" value="nao">
+                                <span>Não é Smart TV</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="isSmartTV" value="nao-sei">
+                                <span>Não sei</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Precisa de Fire TV Stick? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="needsFireStick" value="sim" required>
+                            <span>Sim, preciso de Fire TV Stick</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="needsFireStick" value="nao" required>
+                            <span>Não preciso (já tenho ou TV é Smart)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="needsFireStick" value="nao-sei" required>
+                            <span>Não sei, preciso de orientação</span>
+                        </label>
+                    </div>
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        O Fire TV Stick permite transformar qualquer TV em Smart TV
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Possui internet WiFi no local? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="hasWiFi" value="sim" required>
+                            <span>Sim, tenho internet WiFi</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="hasWiFi" value="nao" required>
+                            <span>Não tenho internet no momento</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Observações Adicionais -->
+            <div class="form-section">
+                <h3><i class="fas fa-comment"></i> Informações Adicionais</h3>
+                
+                <div class="form-group">
+                    <label for="additionalInfo">Alguma observação ou dúvida?</label>
+                    <textarea id="additionalInfo" name="additionalInfo" placeholder="Compartilhe qualquer informação adicional que possa ser relevante..."></textarea>
+                </div>
+            </div>
+
+            <!-- Configurações do FormSubmit -->
+            <input type="hidden" name="_subject" value="Novo Cadastro de Anunciante - MediaExpand">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://marcosdollis.github.io/media-expand/pagina-de-agradecimento.html">
+
+            <button type="submit" class="submit-button" id="submitBtn">
+                <i class="fas fa-paper-plane"></i> Enviar Cadastro
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="landing-page-new.html">
+                <i class="fas fa-arrow-left"></i> Voltar para página inicial
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Adicionar interatividade aos radio buttons
+        document.querySelectorAll('.radio-option, .checkbox-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const input = this.querySelector('input[type="radio"], input[type="checkbox"]');
+                if (input.type === 'radio') {
+                    // Remove seleção de todos os irmãos
+                    this.parentElement.querySelectorAll('.radio-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    input.checked = true;
+                } else {
+                    this.classList.toggle('selected');
+                    input.checked = !input.checked;
+                }
+            });
+        });
+
+        // Mostrar/ocultar campos condicionais baseado em "Você já possui TV?"
+        document.querySelectorAll('input[name="hasTV"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const tvDetailsSection = document.getElementById('tvDetailsSection');
+                if (this.value === 'sim') {
+                    tvDetailsSection.classList.add('show');
+                } else {
+                    tvDetailsSection.classList.remove('show');
+                }
+            });
+        });
+
+        // Máscara para telefone
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+            }
+            e.target.value = value;
+        });
+
+        // Validação antes de enviar
+        document.getElementById('advertiserForm').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        });
+    </script>
+</body>
+</html>
